@@ -1,0 +1,177 @@
+@import "tailwindcss";
+
+:root {
+  --pt-navy: #03045E;
+  --pt-royal: #023E8A;
+  --pt-ocean: #0077B6;
+  --pt-hover: #0096C7;
+  --pt-highlight: #00B4D8;
+  --pt-secondary: #48CAE4;
+  --pt-border: #90E0EF;
+  --pt-surface: #ADE8F4;
+  --pt-bg: #CAF0F8;
+  --pt-white: #FFFFFF;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: "Times New Roman", Times, serif;
+    background-color: var(--pt-bg);
+    color: var(--pt-navy);
+  }
+
+  body,
+  button,
+  input,
+  select,
+  textarea {
+    font-family: "Times New Roman", Times, serif;
+  }
+
+  body {
+    margin: 0;
+    background: linear-gradient(180deg, #CAF0F8 0%, #FFFFFF 45%, #CAF0F8 100%);
+    color: #03045E;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+    color: #03045E;
+  }
+}
+
+/* Frosted glass card surface */
+.glass-card {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(144, 224, 239, 0.75);
+  box-shadow: 0 12px 36px -12px rgba(2, 62, 138, 0.14);
+}
+
+.glass-tint {
+  background: rgba(173, 232, 244, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(144, 224, 239, 0.85);
+}
+
+.glass-nav {
+  background: rgba(255, 255, 255, 0.84);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(144, 224, 239, 0.75);
+  box-shadow: 0 8px 30px -14px rgba(3, 4, 94, 0.14);
+}
+
+/* Glossy button shine sweep on hover */
+.glossy-btn {
+  position: relative;
+  overflow: hidden;
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glossy-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 65%;
+  height: 100%;
+  background: linear-gradient(
+    110deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.38) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  transition: left 520ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.glossy-btn:hover::after {
+  left: 145%;
+}
+
+.glossy-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px -8px rgba(0, 119, 182, 0.45);
+}
+
+/* Card hover lift & soft palette glow */
+.glossy-card-hover {
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glossy-card-hover:hover {
+  transform: translateY(-4px);
+  border-color: #00B4D8;
+  box-shadow: 0 18px 40px -14px rgba(0, 150, 199, 0.28);
+}
+
+/* Floating hero clouds */
+@keyframes cloudDriftSlow {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(28px, -6px, 0);
+  }
+}
+
+@keyframes cloudDriftReverse {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-24px, 5px, 0);
+  }
+}
+
+.animate-cloud-slow {
+  animation: cloudDriftSlow 16s ease-in-out infinite;
+}
+
+.animate-cloud-reverse {
+  animation: cloudDriftReverse 20s ease-in-out infinite;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.page-enter {
+  animation: pageEnter 240ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-cloud-slow,
+  .animate-cloud-reverse,
+  .page-enter {
+    animation: none;
+  }
+  .glossy-btn::after {
+    display: none;
+  }
+  .glossy-card-hover:hover,
+  .glossy-btn:hover {
+    transform: none;
+  }
+}
